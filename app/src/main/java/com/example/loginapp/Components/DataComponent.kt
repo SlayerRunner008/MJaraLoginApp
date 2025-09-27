@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 
 @Composable
-fun DataComponent() {
+fun DataComponent(title: String) {
     var email by remember { mutableStateOf("") }
 
     Column(
@@ -37,7 +37,7 @@ fun DataComponent() {
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
         Text(
-            text = "Email",
+            text = title,
             style = MaterialTheme.typography.titleMedium,
             color = Color(0xFF333333),
             modifier = Modifier.padding(bottom = 12.dp),

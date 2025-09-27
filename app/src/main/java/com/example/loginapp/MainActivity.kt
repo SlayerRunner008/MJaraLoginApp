@@ -12,6 +12,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.loginapp.Screens.LoginScreen
+import com.example.loginapp.Screens.LoginScreenRoute
+import com.example.loginapp.Screens.SignUpScreen
+import com.example.loginapp.Screens.SignupScreenRoute
 import com.example.loginapp.ui.theme.LoginAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,11 +27,25 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             LoginAppTheme {
+                val navController = rememberNavController()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    NavHost(
+                        navController=navController,
+                        startDestination = LoginScreenRoute,
                         modifier = Modifier.padding(innerPadding)
-                    )
+                    ){
+                        composable <LoginScreenRoute> {
+                            LoginScreen(
+                                navController = navController
+                            )
+                        }
+
+                        composable<SignupScreenRoute> {
+                            SignUpScreen(navController = navController)
+                        }
+                    }
+
+
                 }
             }
         }

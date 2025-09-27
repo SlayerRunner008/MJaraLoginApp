@@ -1,5 +1,7 @@
 package com.example.loginapp.Screens
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,15 +20,22 @@ import coil.compose.AsyncImage
 import com.example.loginapp.Components.DataComponent
 import com.example.loginapp.classes.LoginImage
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.savedstate.savedState
+import com.example.loginapp.Components.ButtonComponent
+import com.example.loginapp.Components.PasswordComponent
+import com.example.loginapp.classes.DataComponentClass
 
 val image  = LoginImage(
     url = " ",
     description = " "
 )
+val dataCard = DataComponentClass("Email")
 @Composable
-fun LoginScreen(){
+fun LoginScreen(navController: NavController){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -63,21 +72,31 @@ fun LoginScreen(){
                 .padding(30.dp)
                 .padding(top = 20.dp)
                 .weight(2f),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             Text(text = "Login",
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier.padding(bottom = 50.dp)
                 )
-            DataComponent()
+            DataComponent(title = dataCard.title)
+
+            PasswordComponent(title = "Password")
+
+            ButtonComponent(text = "Login")
+
+            Text(
+                text = "Don't have any account? Sign Up",
+                modifier = Modifier.clickable {
+                    navController.navigate(SignupScreenRoute)
+                },
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Black
+            )
+
         }
 
     }
 }
 
-@Preview(showBackground = true, showSystemUi = false)
-@Composable
-fun LoginPreview() {
-    LoginScreen()
-}
