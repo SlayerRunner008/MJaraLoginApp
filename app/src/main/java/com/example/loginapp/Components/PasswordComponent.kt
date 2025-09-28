@@ -66,6 +66,7 @@ fun PasswordComponent(title: String,descritpion:String) {
                 fontSize = 14.sp,
                 color = Color.Black
             ),
+            visualTransformation = PasswordVisualTransformation(),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color(0xFFF9F9F9),
                 unfocusedContainerColor = Color(0xFFF9F9F9),
