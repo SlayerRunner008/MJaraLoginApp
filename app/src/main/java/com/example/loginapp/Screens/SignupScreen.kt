@@ -4,11 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -17,12 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import coil.compose.AsyncImage
 import com.example.loginapp.Components.ButtonComponent
 import com.example.loginapp.Components.DataComponent
 import com.example.loginapp.Components.PasswordComponent
@@ -34,8 +32,9 @@ val img = LoginImage(
     url = " ",
     description = " "
 )
-val data = listOf(DataComponentClass("First name"), DataComponentClass( "Last name"),
-    DataComponentClass ("Email"))
+val data = listOf(DataComponentClass("First name","Introduzca primer nombre"),
+    DataComponentClass( "Last name","introduzca apellido"),
+    DataComponentClass ("Email","Introduzca su email"))
 @Composable
 fun SignUpScreen(navController: NavController){
     Column(
@@ -46,47 +45,37 @@ fun SignUpScreen(navController: NavController){
 
     ) {
 
-        Column (
+        Row (
             modifier = Modifier
-                .weight(1f)
-                .padding(top = 100.dp)
+                .fillMaxWidth()
+                .weight(1f),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
 
         ) {
-            AsyncImage(
-                model = img.url,
-                contentDescription = img.description,
+            Text(text = "Sign Up",
+                color = Color.White,
+                fontSize = 28.sp,
                 modifier = Modifier
-                    .height(50.dp)
-                    .width(50.dp)
-                    .background(Color.Blue)
-                ,
-
-
+                    .padding(top = 16.dp)
                 )
-
         }
 
         Column (
             modifier = Modifier
                 .fillMaxWidth()
+                .weight(8f)
                 .clip(RoundedCornerShape(topStart = 70.dp))
                 .background(Color.White)
-                .padding(30.dp)
-                .padding(top = 20.dp)
-                .weight(3f),
+                .padding(horizontal = 24.dp, vertical = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            Text(text = "Login",
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.headlineLarge,
-                modifier = Modifier.padding(bottom = 50.dp)
-            )
-            DataComponent(title = data[0].title)
-            DataComponent(title = data[1].title)
-            DataComponent(title = data[2].title)
-            PasswordComponent(title = "Password")
-            PasswordComponent(title = "Confirm Password")
+            DataComponent(title = data[0].title,data[0].description)
+            DataComponent(title = data[1].title,data[1].description)
+            DataComponent(title = data[2].title,data[2].description)
+            PasswordComponent(title = "Password", descritpion = "Introduzca contraseña")
+            PasswordComponent(title = "Confirm Password", descritpion = "Confirme contraseña")
             ButtonComponent(text = "Login")
 
             Text(
@@ -94,11 +83,14 @@ fun SignUpScreen(navController: NavController){
                 modifier = Modifier.clickable {
                     navController.navigate(LoginScreenRoute)
                 },
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodySmall,
                 color = Color.Black
             )
 
         }
+
+
+
 
     }
 

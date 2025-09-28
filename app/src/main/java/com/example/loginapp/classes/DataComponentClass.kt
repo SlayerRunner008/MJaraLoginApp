@@ -1,5 +1,6 @@
 package com.example.loginapp.classes
 
 data class DataComponentClass(
-    val title:String
+    val title:String,
+    val description:String
 )

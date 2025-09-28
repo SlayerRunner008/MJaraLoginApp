@@ -19,10 +19,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
 @Composable
-fun DataComponent(title: String) {
+fun DataComponent(title: String,Description:String) {
     var email by remember { mutableStateOf("") }
 
     Column(
@@ -47,11 +49,20 @@ fun DataComponent(title: String) {
         TextField(
             value = email,
             onValueChange = { email = it },
-            label = { Text("Introduzca correo") },
+            placeholder = {
+                Text(
+                    text = Description,
+                    fontSize = 12.sp
+                )
+            },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(30.dp)
+                .height(50.dp)
                 .clip(RoundedCornerShape(12.dp)),
+            textStyle = TextStyle(
+                fontSize = 14.sp,
+                color = Color.Black
+            ),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color(0xFFF9F9F9),
                 unfocusedContainerColor = Color(0xFFF9F9F9),
@@ -59,9 +70,9 @@ fun DataComponent(title: String) {
                 unfocusedIndicatorColor = Color.Transparent,
                 focusedTextColor = Color.Black,
                 unfocusedTextColor = Color.Black,
-                cursorColor = Color(0xFF6200EE),
-                focusedLabelColor = Color(0xFF6200EE),
-                unfocusedLabelColor = Color(0xFF999999)
+                focusedPlaceholderColor = Color(0xFFCCCCCC),
+                unfocusedPlaceholderColor = Color(0xFFCCCCCC),
+                cursorColor = Color(0xFF6200EE)
             ),
             singleLine = true
         )

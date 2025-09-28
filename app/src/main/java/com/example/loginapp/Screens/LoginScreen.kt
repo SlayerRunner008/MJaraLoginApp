@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -15,25 +16,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.tooling.preview.Preview
-import coil.compose.AsyncImage
 import com.example.loginapp.Components.DataComponent
 import com.example.loginapp.classes.LoginImage
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.savedstate.savedState
+import coil3.compose.AsyncImage
 import com.example.loginapp.Components.ButtonComponent
 import com.example.loginapp.Components.PasswordComponent
 import com.example.loginapp.classes.DataComponentClass
 
 val image  = LoginImage(
-    url = " ",
-    description = " "
+    url = "https://cdn-icons-png.flaticon.com/512/761/761291.png",
+    description = "imagen de halo "
 )
-val dataCard = DataComponentClass("Email")
+val dataCard = DataComponentClass("Email","introduzca su email")
 @Composable
 fun LoginScreen(navController: NavController){
     Column(
@@ -56,12 +54,10 @@ fun LoginScreen(navController: NavController){
                 modifier = Modifier
                     .height(50.dp)
                     .width(50.dp)
-                    .background(Color.Blue)
+                    .clip(CircleShape)
+                    .background(Color.White)
                 ,
-
-
             )
-
         }
 
         Column (
@@ -78,11 +74,12 @@ fun LoginScreen(navController: NavController){
             Text(text = "Login",
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.headlineLarge,
+                color = Color.Black,
                 modifier = Modifier.padding(bottom = 50.dp)
                 )
-            DataComponent(title = dataCard.title)
+            DataComponent(title = dataCard.title, Description = dataCard.description)
 
-            PasswordComponent(title = "Password")
+            PasswordComponent(title = "Password", descritpion = "introduzca su contraseña")
 
             ButtonComponent(text = "Login")
 
